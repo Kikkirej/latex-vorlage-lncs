@@ -1,0 +1,139 @@
+\documentclass[runningheads,a4paper]{llncs}
+
+% Umlaute unter UTF8 nutzen
+\usepackage[utf8]{inputenc}
+
+% Variablen
+\input{config/variablen}
+
+% weitere Pakete
+% Grafiken aus PNG Dateien einbinden
+\usepackage{graphicx}
+
+% Deutsche Sonderzeichen und Silbentrennung nutzen
+\usepackage[ngerman]{babel}
+
+% Eurozeichen einbinden https://ctan.org/pkg/eurosym
+\usepackage[right]{eurosym}
+
+% Zeichenencoding
+\usepackage[T1]{fontenc}
+
+% https://tex.stackexchange.com/questions/147194/is-it-still-useful-to-load-the-lmodern-package
+\usepackage{lmodern}
+
+% mehrseitige Tabellen ermöglichen https://tex.stackexchange.com/questions/469892/how-to-use-longtable-in-latex
+\usepackage{longtable}
+
+% Unterstützung für Schriftarten
+%\newcommand{\changefont}[3]{ 
+%\fontfamily{#1} \fontseries{#2} \fontshape{#3} \selectfont}
+
+% bricht lange URLs "schön" um
+\usepackage[hyphens,obeyspaces,spaces]{url}
+
+% Paket für Textfarben
+\usepackage{color}
+
+% Mathematische Symbole importieren
+\usepackage{amssymb}
+
+% Mathematische Symbole importieren
+\usepackage{amssymb}
+
+%\usepackage[bookmarksnumbered,pdftitle={\titleDocument},hyperfootnotes=false]{hyperref}
+
+\usepackage[
+    backend=biber,
+    style=alphabetic, % https://www.overleaf.com/learn/latex/Biblatex_citation_styles
+    sortlocale=de_DE,
+    natbib=true,
+    url=false,
+    doi=true,
+    eprint=false
+]{biblatex}
+\addbibresource{bibliography}
+
+% für Bildbezeichner
+\usepackage{capt-of}
+
+% für Stichwortverzeichnis
+\usepackage{makeidx}
+
+% für Listings
+\usepackage{listings}
+\lstset{numbers=left, numberstyle=\tiny, numbersep=5pt, keywordstyle=\color{black}\bfseries, stringstyle=\ttfamily,showstringspaces=false,basicstyle=\footnotesize,captionpos=b}
+\lstset{language=java}
+
+% Indexerstellung
+\makeindex
+
+% Abkürzungsverzeichnis
+\usepackage[german]{nomencl}
+\let\abbrev\nomenclature
+% Abkürzungsverzeichnis LiveTex Version
+% Titel des Abkürzungsverzeichnisses
+\renewcommand{\nomname}{Abkürzungsverzeichnis}
+% Abstand zwischen Abkürzung und Erläuterung
+\setlength{\nomlabelwidth}{.25\textwidth}
+% Zwischenraum zwischen Abkürzung und Erläuterung mit Punkten
+\renewcommand{\nomlabel}[1]{#1 \dotfill}
+% Variation des Abstandes der einzelnen Abkürzungen zu einander
+\setlength{\nomitemsep}{-\parsep}
+% Index mit Abkürzungen erzeugen
+\makenomenclature
+%\makeglossary
+
+\begin{document}
+    % hier werden die Trennvorschläge inkludiert
+    \input{config/trennung}
+    
+    % lncs-Umgebung aus Variablen setzen 
+    \title{\titelDerArbeit}
+    \author{\autorDerArbeit}
+    \institute{\institutHinterDerArbeit}
+    \email{\mailAutorDerArbeit}
+    \maketitle
+    \input{inhalte/00_abstract.tex}
+
+    % Inhaltsverzeichnis anzeigen
+    \newpage
+    \tableofcontents
+
+    % das Abbildungsverzeichnis
+    %\newpage
+    % Abbildungsverzeichnis soll im Inhaltsverzeichnis auftauchen
+    \addcontentsline{toc}{section}{Abbildungsverzeichnis}
+    % Verion 1: Abbildungsverzeichnis MIT führender Nummberierung endgueltig anzeigen
+    \listoffigures
+
+    % das Tabellenverzeichnis
+    %\newpage
+    % Tabellenverzeichnis soll im Inhaltsverzeichnis auftauchen
+    \addcontentsline{toc}{section}{Tabellenverzeichnis}
+    % \fancyhead[L]{Abbildungsverzeichnis / Abkürzungsverzeichnis} %Kopfzeile links
+    % Tabellenverzeichnis endgültig anzeigen
+    \listoftables
+    
+    % das Abkürzungsverzeichnis
+    %\newpage
+    % Abkürzungsverzeichnis soll im Inhaltsverzeichnis auftauchen
+    \addcontentsline{toc}{section}{Abkürzungsverzeichnis}
+    % das Abkürzungsverzeichnis entgültige Ausgeben
+    %\fancyhead[L]{Abkürzungsverzeichnis} %Kopfzeile links
+    \input{config/abkuerzungen}
+    \printnomenclature[3cm]
+
+    % hier der eigentliche Input
+    \input{inhalte/01_einleitung.tex}
+
+
+    % Literaturliste soll im Inhaltsverzeichnis auftauchen
+    \newpage
+    \addcontentsline{toc}{section}{Literaturverzeichnis}
+    % Literaturverzeichnis anzeigen
+    \renewcommand\refname{Literaturverzeichnis}
+    \printbibliography
+
+
+\end{document}
